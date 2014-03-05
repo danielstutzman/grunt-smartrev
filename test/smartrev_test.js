@@ -8,7 +8,14 @@ var compareResults = function (name, test) {
     var expectedPath = path.join('test', 'expected', name);
 
     fs.readdir(actualPath, function (err, files) {
-        if (err || !files.length)
+        if (err)
+            throw err;
+
+        files = files.filter(function (p) {
+            var filePath = path.join(actualPath, p);
+            return fs.lstatSync(filePath).isFile();
+        });
+        if (!files.length)
             throw new Error('No files found to compare!');
 
         test.expect(files.length * 2);
@@ -18,7 +25,7 @@ var compareResults = function (name, test) {
 
             var actual = fs.readFileSync(path.join(actualPath, item));
             var expected = fs.readFileSync(expectedFilePath);
-            test.deepEqual(actual, expected, 'Files match');
+            test.equal(actual.toString(), expected.toString(), 'Files match');
         });
         test.done();
     });
