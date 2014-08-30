@@ -30,7 +30,7 @@ var parseDeclaration = function (declaration) {
     // CSS rules may have multiple `url(...)` statements in a single value.
     while (match = URL_REGEX.exec(val)) {
         url = this.resolve(match[2]);
-        if (!fs.existsSync(url))
+        if (false && !fs.existsSync(url))
             continue;
 
         occurrences += 1;

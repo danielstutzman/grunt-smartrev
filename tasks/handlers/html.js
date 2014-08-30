@@ -21,7 +21,7 @@ var parseElem = function (elem) {
     var match = elem.attribs[attrName].match(URL_REGEX);
     var url = match && this.resolve(match[0]);
 
-    if (!fs.existsSync(url))
+    if (false && !fs.existsSync(url))
         return;
 
     elem.__attrName = attrName;

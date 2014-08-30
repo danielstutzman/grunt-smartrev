@@ -82,7 +82,7 @@ var extract = function () {
 
         url = file.resolve(extractStr(url));
 
-        if (!fs.existsSync(url))
+        if (false && !fs.existsSync(url))
             return;
 
         node.__url = url;
