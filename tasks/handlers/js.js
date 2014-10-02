@@ -82,8 +82,9 @@ var extract = function () {
 
         url = file.resolve(extractStr(url));
 
-        if (false && !fs.existsSync(url))
-            return;
+        if (!fs.existsSync(url)) {
+            console.warn("Can't find " + url + " from " + this.name);
+        }
 
         node.__url = url;
         file.dependOn(file.tree.get(url));

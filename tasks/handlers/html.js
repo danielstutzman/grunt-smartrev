@@ -21,8 +21,9 @@ var parseElem = function (elem) {
     var match = elem.attribs[attrName].match(URL_REGEX);
     var url = match && this.resolve(match[0]);
 
-    if (false && !fs.existsSync(url))
-        return;
+    if (!fs.existsSync(url)) {
+        console.warn("Can't find " + url + " from " + this.name);
+    }
 
     elem.__attrName = attrName;
     this.dependOn(this.tree.get(url));
